@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Places | Treasure Valley Tech Tavern</title>
+  <link rel="icon" type="image/png" href="./favicon-tvtt.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chicle&family=Cute+Font&family=Jersey+15&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --tvtt-bg: #000;
+      --tvtt-panel: #070707;
+      --tvtt-panel-2: #111;
+      --tvtt-text: #f4f6f7;
+      --tvtt-muted: #dbe3e7;
+      --tvtt-soft: #aeb7bd;
+      --tvtt-cyan: #63e0e5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top, rgba(99, 224, 229, 0.12), transparent 30%),
+        linear-gradient(180deg, rgba(99, 224, 229, 0.05), transparent 220px),
+        var(--tvtt-bg);
+      color: var(--tvtt-text);
+      font-family: "Cute Font", Arial, sans-serif;
+    }
+
+    .tvtt-places-page {
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-top: 86px;
+    }
+
+    .tvtt-site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      width: 100%;
+      min-height: 86px;
+      padding: 12px 42px;
+      background: rgba(17, 17, 17, 0.94);
+      border-bottom: 1px solid rgba(99, 224, 229, 0.3);
+      backdrop-filter: blur(12px);
+    }
+
+    .tvtt-site-logo {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+    }
+
+    .tvtt-site-logo img {
+      display: block;
+      width: 148px;
+      height: auto;
+    }
+
+    .tvtt-site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 24px;
+    }
+
+    .tvtt-site-nav a,
+    .tvtt-site-footer-nav a {
+      color: var(--tvtt-text);
+      font-family: "Chicle", Arial, sans-serif;
+      font-size: 1.35rem;
+      line-height: 1;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .tvtt-site-nav a:hover,
+    .tvtt-site-nav a:focus-visible,
+    .tvtt-site-footer-nav a:hover,
+    .tvtt-site-footer-nav a:focus-visible {
+      color: var(--tvtt-cyan);
+    }
+
+    .tvtt-site-nav a:focus-visible,
+    .tvtt-place-button:focus-visible {
+      outline: 2px solid var(--tvtt-cyan);
+      outline-offset: 6px;
+    }
+
+    .tvtt-hero {
+      padding: 78px 20px 52px;
+    }
+
+    .tvtt-hero-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .tvtt-page-title,
+    .tvtt-section-title,
+    .tvtt-place-name,
+    .tvtt-kicker {
+      font-family: "Jersey 15", Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .tvtt-page-title {
+      margin: 0 0 18px;
+      color: #fff;
+      font-size: clamp(48px, 8vw, 82px);
+      line-height: 0.92;
+    }
+
+    .tvtt-kicker {
+      margin: 0 0 22px;
+      color: var(--tvtt-cyan);
+      font-size: clamp(32px, 5vw, 48px);
+    }
+
+    .tvtt-hero-copy {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .tvtt-hero-copy p,
+    .tvtt-place-copy p,
+    .tvtt-uses-list li {
+      color: var(--tvtt-muted);
+      font-size: 1.95rem;
+      line-height: 1.32;
+    }
+
+    .tvtt-hero-copy p,
+    .tvtt-place-copy p {
+      margin: 0 0 18px;
+    }
+
+    .tvtt-hero-copy p:last-child,
+    .tvtt-place-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .tvtt-uses {
+      max-width: 860px;
+      margin: 32px auto 0;
+      padding: 28px 28px 30px;
+      border: 1px solid rgba(99, 224, 229, 0.24);
+      border-radius: 10px;
+      background:
+        linear-gradient(180deg, rgba(99, 224, 229, 0.08), transparent 180px),
+        var(--tvtt-panel);
+      text-align: left;
+    }
+
+    .tvtt-uses-list {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tvtt-uses-list li {
+      position: relative;
+      margin-bottom: 14px;
+      padding-left: 26px;
+    }
+
+    .tvtt-uses-list li::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--tvtt-cyan);
+    }
+
+    .tvtt-section {
+      padding: 24px 20px 82px;
+    }
+
+    .tvtt-section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tvtt-section-title {
+      margin: 0 0 48px;
+      color: #fff;
+      font-size: clamp(40px, 6vw, 62px);
+      text-align: center;
+    }
+
+    .tvtt-places-list {
+      display: grid;
+      gap: 36px;
+    }
+
+    .tvtt-place-card {
+      display: grid;
+      grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+      gap: 38px;
+      align-items: center;
+      padding: 30px;
+      border: 1px solid rgba(99, 224, 229, 0.24);
+      border-radius: 12px;
+      background:
+        linear-gradient(180deg, rgba(99, 224, 229, 0.06), transparent 180px),
+        var(--tvtt-panel-2);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    }
+
+    .tvtt-place-card:nth-of-type(even) {
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+    }
+
+    .tvtt-place-card:nth-of-type(even) .tvtt-place-media {
+      grid-column: 2;
+    }
+
+    .tvtt-place-card:nth-of-type(even) .tvtt-place-copy {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .tvtt-place-media {
+      display: flex;
+      justify-content: center;
+    }
+
+    .tvtt-video-frame {
+      width: min(100%, 360px);
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #111;
+      border: 1px solid rgba(99, 224, 229, 0.22);
+    }
+
+    .tvtt-video-frame iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .tvtt-place-copy {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .tvtt-place-name {
+      margin: 0 0 20px;
+      color: var(--tvtt-cyan);
+      font-size: clamp(34px, 5vw, 52px);
+    }
+
+    .tvtt-place-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .tvtt-place-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border: 1px solid var(--tvtt-cyan);
+      border-radius: 8px;
+      color: #000;
+      background: var(--tvtt-cyan);
+      font-family: "Cute Font", Arial, sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .tvtt-place-button:hover,
+    .tvtt-place-button:focus {
+      color: var(--tvtt-cyan);
+      background: transparent;
+    }
+
+    .tvtt-site-footer {
+      padding: 28px 16px 34px;
+      border-top: 1px solid rgba(99, 224, 229, 0.22);
+      background: #0b0b0b;
+    }
+
+    .tvtt-site-footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px 24px;
+      margin: 0 auto;
+      max-width: 980px;
+    }
+
+    .tvtt-site-footer-copy {
+      margin: 18px 0 0;
+      color: var(--tvtt-soft);
+      font-size: 1.35rem;
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .tvtt-places-page {
+        padding-top: 126px;
+      }
+
+      .tvtt-site-header {
+        flex-direction: column;
+        gap: 14px;
+        min-height: 0;
+        padding: 12px 16px 16px;
+      }
+
+      .tvtt-site-logo img {
+        width: 122px;
+      }
+
+      .tvtt-site-nav {
+        justify-content: center;
+        gap: 12px 18px;
+      }
+
+      .tvtt-site-nav a,
+      .tvtt-site-footer-nav a {
+        font-size: 1.1rem;
+      }
+
+      .tvtt-hero {
+        padding: 58px 18px 40px;
+      }
+
+      .tvtt-uses {
+        padding: 24px 20px 26px;
+      }
+
+      .tvtt-section {
+        padding: 18px 18px 58px;
+      }
+
+      .tvtt-section-title {
+        margin-bottom: 34px;
+      }
+
+      .tvtt-place-card,
+      .tvtt-place-card:nth-of-type(even) {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 24px 20px 26px;
+      }
+
+      .tvtt-place-card:nth-of-type(even) .tvtt-place-media,
+      .tvtt-place-card:nth-of-type(even) .tvtt-place-copy {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .tvtt-video-frame {
+        width: min(82vw, 360px);
+      }
+
+      .tvtt-place-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="tvtt-places-page">
+    <header class="tvtt-site-header">
+      <a class="tvtt-site-logo" href="https://treasurevalleytechtavern.com" aria-label="Treasure Valley Tech Tavern home">
+        <img src="tvtt-phone-logo.png" alt="Treasure Valley Tech Tavern">
+      </a>
+      <nav class="tvtt-site-nav" aria-label="Main navigation">
+        <a href="https://treasurevalleytechtavern.com">Home</a>
+        <a href="https://help.treasurevalleytechtavern.com/for-bands/">For Bands</a>
+        <a href="https://help.treasurevalleytechtavern.com/for-places/">For Bars &amp; Venues</a>
+        <a href="https://clips.treasurevalleytechtavern.com">Clips</a>
+        <a href="https://places.treasurevalleytechtavern.com" aria-current="page">Places</a>
+        <a href="https://treasurevalleytechtavern.com/about">About Us</a>
+      </nav>
+    </header>
+
+    <section class="tvtt-hero">
+      <div class="tvtt-hero-inner">
+        <h1 class="tvtt-page-title">Local Scene (Bars + Venues)</h1>
+        <p class="tvtt-kicker">We capture what a room actually feels like.</p>
+
+        <div class="tvtt-hero-copy">
+          <p>Short-form video, crowd moments, and live energy so bands and venues have something real to share after the night&apos;s over.</p>
+        </div>
+
+        <div class="tvtt-uses">
+          <p>This footage gets used for:</p>
+          <ul class="tvtt-uses-list">
+            <li>TikTok, Instagram, and Facebook Reels</li>
+            <li>Show promotion before and after the night</li>
+            <li>Band pages and live listings</li>
+            <li>Venue social feeds</li>
+            <li>Ongoing content so accounts do not go silent</li>
+          </ul>
+          <p>Sometimes we just show up and capture the night.</p>
+          <p>Sometimes we help organize and post everything after.</p>
+          <p>Sometimes we handle the whole thing so you do not have to think about it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tvtt-section" aria-labelledby="places-we-work-with">
+      <div class="tvtt-section-inner">
+        <h2 class="tvtt-section-title" id="places-we-work-with">Places We Work With</h2>
+
+        <div class="tvtt-places-list">
+          <article class="tvtt-place-card">
+            <div class="tvtt-place-media">
+              <div class="tvtt-video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/IhlwEuSoghA"
+                  title="Overland Bar Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <div class="tvtt-place-copy">
+              <h3 class="tvtt-place-name">Overland Bar - Boise Bench</h3>
+
+              <p>We manage Overland Bar&apos;s TikTok and built and maintain their website, helping bring their nightly karaoke and crowd energy online in a way that actually matches what it feels like to be there.</p>
+
+              <p>Starting from zero, their TikTok has grown to over 1,100 followers and 200K+ views in the last 60 days. People around Boise are starting to recognize it and talk about it.</p>
+
+              <p>Overland is a long-standing neighborhood spot on the Bench with karaoke every single night, making it one of Boise&apos;s most consistent nightlife experiences.</p>
+
+              <div class="tvtt-place-links" aria-label="Venue links">
+                <a class="tvtt-place-button" href="https://overlandbar.com/home" target="_blank" rel="noopener">Website</a>
+                <a class="tvtt-place-button" href="https://www.tiktok.com/@overlandbar" target="_blank" rel="noopener">TikTok</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="tvtt-section" aria-labelledby="places-we-experienced">
+      <div class="tvtt-section-inner">
+        <h2 class="tvtt-section-title" id="places-we-experienced">Places We&apos;ve Experienced</h2>
+
+        <div class="tvtt-places-list">
+          <article class="tvtt-place-card">
+            <div class="tvtt-place-media">
+              <div class="tvtt-video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/OkpkXcalQ9M"
+                  title="Knitting Factory Boise Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <div class="tvtt-place-copy">
+              <h3 class="tvtt-place-name">Knitting Factory Boise</h3>
+              <p>The Knitting Factory is one of the main stops for touring acts coming through Boise. It sits right in downtown and pulls a mix of crowds depending on the night, from people seeing a band they&apos;ve followed for years to people just looking for something to do that turns into a really good show.</p>
+              <p>The room holds around 1,000 people, which puts it in a nice middle ground. It&apos;s big enough to feel like an event, but still small enough that you do not feel disconnected from what&apos;s happening on stage. The layout gives you options. You can get right up near the front and be in the middle of it, or hang back and still have a clear view of the stage. Sightlines are solid, and the space is built for live music in a way that feels intentional, not improvised.</p>
+              <p>The experience here depends a lot on the artist. Some nights are packed and high energy, with the whole room moving. Other nights feel more dialed in, with people focused on the performance. Either way, the crowd tends to be engaged, not just background noise. It&apos;s also one of the places where you&apos;ll see Boise connect to the larger touring circuit. A lot of artists pass through here on their way between bigger cities, which gives you a chance to catch shows that feel bigger than what you&apos;d expect locally, without losing that Boise energy.</p>
+              <p>If you&apos;re looking for something that feels like a full show without being overwhelming, Knitting Factory tends to land right in that space.</p>
+            </div>
+          </article>
+
+          <article class="tvtt-place-card">
+            <div class="tvtt-place-media">
+              <div class="tvtt-video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/H7QmzBza1NQ"
+                  title="Neurolux Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <div class="tvtt-place-copy">
+              <h3 class="tvtt-place-name">Neurolux</h3>
+              <p>Neurolux is both a bar and a venue, and it leans into that in the best way. It&apos;s been part of the Boise scene for years and has built a reputation as one of the places where you go to catch something a little more off the beaten path. Tucked into downtown Boise, Neurolux feels a little removed from the more polished side of it.</p>
+              <p>The room is smaller, darker, and more packed in. The stage is low, the crowd is close, and there&apos;s not much distance between you and the artist. You&apos;re not watching from far away. You&apos;re right there.</p>
+              <p>The lineup changes a lot, but it tends to be the kind of place where you&apos;re either discovering something new or seeing an artist in a much smaller room than you normally would. You&apos;ll get touring acts with really dedicated followings, mixed in with local bands sharing the same stage.</p>
+              <p>When we saw Leah Kate there, it did not feel like a distant performance. It felt close, like the whole room was part of it. That&apos;s the kind of experience Neurolux leans toward. Some nights feel chaotic in the best way. Others feel locked in, with the crowd paying attention to every moment. It really depends on the show.</p>
+              <p>It&apos;s also the kind of place where people stick around. You&apos;ll see familiar faces, or at least people who feel like regulars by the end of the night. It has that neighborhood bar energy layered over a live show.</p>
+              <p>If you&apos;re looking for something polished or predictable, this probably is not it. But if you want a show that feels close, a little raw, and actually connected to the room you&apos;re standing in, Neurolux is one of the places that does that best.</p>
+            </div>
+          </article>
+
+          <article class="tvtt-place-card">
+            <div class="tvtt-place-media">
+              <div class="tvtt-video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/7CKEhNn19Qk"
+                  title="Revolution Concert House Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <div class="tvtt-place-copy">
+              <h3 class="tvtt-place-name">Revolution Concert House</h3>
+              <p>Just outside downtown in Garden City near the fairgrounds, Revolution Concert House is one of the bigger rooms in the area, and it feels like it from the moment you walk in. It&apos;s a large, open space that can hold around 2,000 people depending on the show, which gives it a very different energy than most venues around Boise. There&apos;s room to move, room to spread out, and room to take everything in without feeling packed in unless you want to be.</p>
+              <p>The shows here tend to lean louder, heavier, or just bigger overall. Depending on the night, that can mean a packed floor with a lot of movement, or a more spread-out crowd that still fills the space in its own way. One of the things that stands out about Revolution is that you can choose your experience. You can get right up near the stage and be in it, or hang back and watch the whole room. Both feel intentional.</p>
+              <p>Even with the size, it still carries that Treasure Valley energy where people are there because they actually care about the show. You&apos;ll see people locked in, reacting, and fully present, just on a larger scale. If you&apos;re looking for something that feels more like a full concert experience rather than a bar with a stage, this is one of the places that does that well.</p>
+            </div>
+          </article>
+
+          <article class="tvtt-place-card">
+            <div class="tvtt-place-media">
+              <div class="tvtt-video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/CrTCr2QE2u4"
+                  title="Treefort Music Hall Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <div class="tvtt-place-copy">
+              <h3 class="tvtt-place-name">Treefort Music Hall</h3>
+              <p>Treefort Music Hall sits right in downtown Boise and feels like a space that was built specifically for live music, not adapted into it later. The room lands somewhere in the middle size-wise. It&apos;s big enough to feel like a real show, but still small enough that you stay connected to what&apos;s happening on stage. You&apos;re not packed in like a tiny bar, but you&apos;re also not so far back that the performance feels distant.</p>
+              <p>Everything about the space feels intentional. The stage is clearly defined, the sound is dialed in, and the layout makes it easy to find a spot that works for you. Whether you&apos;re closer to the front or hanging back, it still feels like you&apos;re part of the same room. The shows that come through here tend to feel curated. There&apos;s a mix of touring artists and acts that fit into the broader Treefort ecosystem, so the crowd usually shows up ready to pay attention. You&apos;ll get energy when it&apos;s called for, but also moments where the room is just locked in on the performance.</p>
+              <p>It&apos;s one of the places where you can tell people are there on purpose. Not just because it&apos;s something to do, but because they actually want to be at that show. If you&apos;re looking for something that feels polished without losing connection to the artist or the room, Treefort Music Hall tends to land right in that space.</p>
+            </div>
+          </article>
+
+          <article class="tvtt-place-card">
+            <div class="tvtt-place-media">
+              <div class="tvtt-video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/IXVWdNtWghs"
+                  title="ExtraMile Arena Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <div class="tvtt-place-copy">
+              <h3 class="tvtt-place-name">ExtraMile Arena</h3>
+              <p>Located on the Boise State campus, ExtraMile Arena sits a little outside the typical downtown bar flow. It is the largest live music room in Boise, and it feels like it. It&apos;s built as a full arena first, which means the experience depends a lot on where you&apos;re sitting or standing.</p>
+              <p>The venue can hold roughly 13,000 people for concerts, and it&apos;s where the biggest tours land when they come through the Treasure Valley. You&apos;ll see major pop, country, hip hop, and legacy acts here, the kinds of shows that are designed to fill a room this size. Because of that, your experience really comes down to the seat you paid for. Floor and lower bowl spots can feel immersive and high energy, especially when the crowd is fully engaged. Upper sections are more about taking in the full production. You&apos;re further from the stage, but you get a wider view of lighting, visuals, and the scale of the show.</p>
+              <p>Some artists translate really well to this kind of space. Strong visuals, big stage presence, and a crowd that&apos;s there for it can make the whole room feel connected, even at that size. Other shows can feel a little more distant, especially if you&apos;re further back. Sightlines are generally good for an arena, and even higher seats can still give you a clear view of what&apos;s happening, just at a different level of detail. It&apos;s less about being close and more about being part of something bigger.</p>
+              <p>If you&apos;re going to ExtraMile, it&apos;s worth thinking about the kind of experience you want. Up close if you want to feel it, or further back if you want to take it all in. Either way, it&apos;s one of the places where Boise steps into a much larger scale of live music.</p>
+            </div>
+          </article>
+
+          <article class="tvtt-place-card">
+            <div class="tvtt-place-media">
+              <div class="tvtt-video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/9bJIL57bduU"
+                  title="Ford Idaho Center Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+
+            <div class="tvtt-place-copy">
+              <h3 class="tvtt-place-name">Ford Idaho Center</h3>
+              <p>Ford Idaho Center sits out in Nampa, and it covers a lot more ground than most venues in the area, both literally and in terms of what kind of experience you get. It&apos;s not just one room. Depending on the show, you might be in the indoor arena or outside at the amphitheater, and those feel completely different.</p>
+              <p>The indoor space is closer to a traditional arena setup, similar to ExtraMile, where your seat plays a big role in how the night feels. You can get close and be in it, or sit further back and take in the full production. The amphitheater is where things shift. Open air, more room to spread out, and a crowd that tends to feel a little more relaxed. It&apos;s less about precision and more about the overall atmosphere.</p>
+              <p>Because of that, Ford Idaho Center feels less predictable in a good way. The experience changes depending on the artist, the setup, and even the weather if you&apos;re outside. If you&apos;re heading out there, it&apos;s less about one specific kind of night and more about knowing what kind of show you&apos;re walking into.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="tvtt-site-footer">
+      <nav class="tvtt-site-footer-nav" aria-label="Footer">
+        <a href="https://treasurevalleytechtavern.com">Home</a>
+        <a href="https://help.treasurevalleytechtavern.com">How We Help</a>
+        <a href="https://clips.treasurevalleytechtavern.com">Clips</a>
+        <a href="https://places.treasurevalleytechtavern.com" aria-current="page">Places</a>
+        <a href="https://treasurevalleytechtavern.com/about">About Us</a>
+      </nav>
+      <p class="tvtt-site-footer-copy">Copyright &copy; 2026 Treasure Valley Tech Tavern - Boise, Idaho - All Rights Reserved.</p>
+    </footer>
+  </main>
+</body>
+</html>
+
+
+
+
