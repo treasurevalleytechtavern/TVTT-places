@@ -82,7 +82,7 @@
     .tvtt-site-footer-nav a {
       color: var(--tvtt-text);
       font-family: "Chicle", Arial, sans-serif;
-      font-size: 1.5rem;
+      font-size: 1.35rem;
       line-height: 1;
       text-decoration: none;
       text-transform: uppercase;
@@ -124,14 +124,14 @@
     .tvtt-page-title {
       margin: 0 0 24px;
       color: #fff;
-      font-size: clamp(56px, 8vw, 90px);
+      font-size: clamp(48px, 8vw, 82px);
       line-height: 0.92;
     }
 
     .tvtt-kicker {
       margin: 0 0 28px;
       color: var(--tvtt-cyan);
-      font-size: clamp(38px, 5vw, 54px);
+      font-size: clamp(32px, 5vw, 48px);
     }
 
     .tvtt-hero-copy {
@@ -143,8 +143,8 @@
     .tvtt-place-copy p,
     .tvtt-uses-list li {
       color: var(--tvtt-muted);
-      font-size: clamp(2.35rem, 3.1vw, 2.85rem);
-      line-height: 1.36;
+      font-size: 1.95rem;
+      line-height: 1.32;
     }
 
     .tvtt-hero-copy p,
@@ -160,7 +160,7 @@
     .tvtt-uses {
       max-width: 860px;
       margin: 32px auto 0;
-      padding: 34px 34px 36px;
+      padding: 32px 32px 34px;
       border: 1px solid rgba(99, 224, 229, 0.24);
       border-radius: 10px;
       background:
@@ -169,25 +169,37 @@
       text-align: left;
     }
 
+    .tvtt-uses p,
+    .tvtt-uses li {
+      color: var(--tvtt-muted);
+      font-family: "Cute Font", Arial, sans-serif;
+      font-size: 2.3rem;
+      line-height: 1.36;
+    }
+
+    .tvtt-uses p {
+      margin: 0 0 18px;
+    }
+
     .tvtt-uses-list {
-      margin: 22px 0 0;
+      margin: 18px 0 0;
       padding: 0;
       list-style: none;
     }
 
     .tvtt-uses-list li {
       position: relative;
-      margin-bottom: 20px;
-      padding-left: 32px;
+      margin-bottom: 18px;
+      padding-left: 30px;
     }
 
     .tvtt-uses-list li::before {
       content: "";
       position: absolute;
-      top: 14px;
+      top: 12px;
       left: 0;
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       background: var(--tvtt-cyan);
     }
@@ -204,7 +216,7 @@
     .tvtt-section-title {
       margin: 0 0 48px;
       color: #fff;
-      font-size: clamp(46px, 6vw, 68px);
+      font-size: clamp(40px, 6vw, 62px);
       text-align: center;
     }
 
@@ -319,17 +331,17 @@
     .tvtt-thumb-title {
       overflow: hidden;
       font-family: "Cute Font", Arial, sans-serif;
-      font-size: 1.85rem;
+      font-size: 1.55rem;
       font-weight: 800;
       line-height: 1.05;
       text-overflow: ellipsis;
-      white-space: nowrap;
+      white-space: normal;
     }
 
     .tvtt-thumb-channel {
       color: #fff;
       font-family: "Cute Font", Arial, sans-serif;
-      font-size: 1.42rem;
+      font-size: 1.18rem;
       font-weight: 700;
       line-height: 1.1;
     }
@@ -374,7 +386,7 @@
     .tvtt-place-name {
       margin: 0 0 20px;
       color: var(--tvtt-cyan);
-      font-size: clamp(38px, 5vw, 58px);
+      font-size: clamp(34px, 5vw, 52px);
     }
 
     .tvtt-place-links {
@@ -396,7 +408,7 @@
       color: #000;
       background: var(--tvtt-cyan);
       font-family: "Cute Font", Arial, sans-serif;
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 700;
       line-height: 1;
       text-align: center;
@@ -427,7 +439,7 @@
     .tvtt-site-footer-copy {
       margin: 18px 0 0;
       color: var(--tvtt-soft);
-      font-size: 1.5rem;
+      font-size: 1.35rem;
       line-height: 1.1;
       text-align: center;
     }
@@ -455,7 +467,7 @@
 
       .tvtt-site-nav a,
       .tvtt-site-footer-nav a {
-        font-size: 1.22rem;
+        font-size: 1.1rem;
       }
 
       .tvtt-hero {
@@ -464,6 +476,11 @@
 
       .tvtt-uses {
         padding: 28px 22px 30px;
+      }
+
+      .tvtt-uses p,
+      .tvtt-uses li {
+        font-size: 2rem;
       }
 
       .tvtt-section {
@@ -492,11 +509,11 @@
       }
 
       .tvtt-thumb-title {
-        font-size: 1.62rem;
+        font-size: 1.42rem;
       }
 
       .tvtt-thumb-channel {
-        font-size: 1.24rem;
+        font-size: 1.08rem;
       }
 
       .tvtt-place-button {
@@ -554,10 +571,10 @@
           <article class="tvtt-place-card">
             <div class="tvtt-place-media">
               <div class="tvtt-video-frame">
-                <button class="tvtt-video-thumb" type="button" data-video-id="IhlwEuSoghA" data-title="Overland Bar - Boise Bench">
-                  <img src="https://i.ytimg.com/vi/IhlwEuSoghA/hqdefault.jpg" alt="Overland Bar - Boise Bench thumbnail" loading="lazy">
+                <button class="tvtt-video-thumb" type="button" data-video-id="IhlwEuSoghA" data-title="A Thursday Night at Overland Bar (Karaoke & Crowd Vibes) | Boise, ID">
+                  <img src="https://i.ytimg.com/vi/IhlwEuSoghA/hqdefault.jpg" alt="A Thursday Night at Overland Bar (Karaoke & Crowd Vibes) | Boise, ID thumbnail" loading="lazy">
                   <span class="tvtt-thumb-label">
-                    <span class="tvtt-thumb-title">Overland Bar - Boise Bench</span>
+                    <span class="tvtt-thumb-title">A Thursday Night at Overland Bar (Karaoke &amp; Crowd Vibes) | Boise, ID</span>
                     <span class="tvtt-thumb-channel">Treasure Valley Tech Tavern</span>
                   </span>
                   <span class="tvtt-play-icon" aria-hidden="true"></span>
@@ -592,10 +609,10 @@
           <article class="tvtt-place-card">
             <div class="tvtt-place-media">
               <div class="tvtt-video-frame">
-                <button class="tvtt-video-thumb" type="button" data-video-id="OkpkXcalQ9M" data-title="Knitting Factory Boise">
-                  <img src="https://i.ytimg.com/vi/OkpkXcalQ9M/hqdefault.jpg" alt="Knitting Factory Boise thumbnail" loading="lazy">
+                <button class="tvtt-video-thumb" type="button" data-video-id="OkpkXcalQ9M" data-title="Bad Blood (Live) | Boise, ID - 01.23.2026 - The Taylor Party">
+                  <img src="https://i.ytimg.com/vi/OkpkXcalQ9M/hqdefault.jpg" alt="Bad Blood (Live) | Boise, ID - 01.23.2026 - The Taylor Party thumbnail" loading="lazy">
                   <span class="tvtt-thumb-label">
-                    <span class="tvtt-thumb-title">Knitting Factory Boise</span>
+                    <span class="tvtt-thumb-title">Bad Blood (Live) | Boise, ID - 01.23.2026 - The Taylor Party</span>
                     <span class="tvtt-thumb-channel">Treasure Valley Tech Tavern</span>
                   </span>
                   <span class="tvtt-play-icon" aria-hidden="true"></span>
@@ -615,10 +632,10 @@
           <article class="tvtt-place-card">
             <div class="tvtt-place-media">
               <div class="tvtt-video-frame">
-                <button class="tvtt-video-thumb" type="button" data-video-id="H7QmzBza1NQ" data-title="Neurolux">
-                  <img src="https://i.ytimg.com/vi/H7QmzBza1NQ/hqdefault.jpg" alt="Neurolux thumbnail" loading="lazy">
+                <button class="tvtt-video-thumb" type="button" data-video-id="H7QmzBza1NQ" data-title="10 Things I Hate About U (Live at Neurolux, Boise ID - Oct 15, 2023) - Leah Kate">
+                  <img src="https://i.ytimg.com/vi/H7QmzBza1NQ/hqdefault.jpg" alt="10 Things I Hate About U (Live at Neurolux, Boise ID - Oct 15, 2023) - Leah Kate thumbnail" loading="lazy">
                   <span class="tvtt-thumb-label">
-                    <span class="tvtt-thumb-title">Neurolux</span>
+                    <span class="tvtt-thumb-title">10 Things I Hate About U (Live at Neurolux, Boise ID - Oct 15, 2023) - Leah Kate</span>
                     <span class="tvtt-thumb-channel">Treasure Valley Tech Tavern</span>
                   </span>
                   <span class="tvtt-play-icon" aria-hidden="true"></span>
@@ -640,10 +657,10 @@
           <article class="tvtt-place-card">
             <div class="tvtt-place-media">
               <div class="tvtt-video-frame">
-                <button class="tvtt-video-thumb" type="button" data-video-id="7CKEhNn19Qk" data-title="Revolution Concert House">
-                  <img src="https://i.ytimg.com/vi/7CKEhNn19Qk/hqdefault.jpg" alt="Revolution Concert House thumbnail" loading="lazy">
+                <button class="tvtt-video-thumb" type="button" data-video-id="7CKEhNn19Qk" data-title="bbno$ - lalala Crowd Moment (Live) | Boise, ID - 03.15.2025">
+                  <img src="https://i.ytimg.com/vi/7CKEhNn19Qk/hqdefault.jpg" alt="bbno$ - lalala Crowd Moment (Live) | Boise, ID - 03.15.2025 thumbnail" loading="lazy">
                   <span class="tvtt-thumb-label">
-                    <span class="tvtt-thumb-title">Revolution Concert House</span>
+                    <span class="tvtt-thumb-title">bbno$ - lalala Crowd Moment (Live) | Boise, ID - 03.15.2025</span>
                     <span class="tvtt-thumb-channel">Treasure Valley Tech Tavern</span>
                   </span>
                   <span class="tvtt-play-icon" aria-hidden="true"></span>
@@ -662,10 +679,10 @@
           <article class="tvtt-place-card">
             <div class="tvtt-place-media">
               <div class="tvtt-video-frame">
-                <button class="tvtt-video-thumb" type="button" data-video-id="CrTCr2QE2u4" data-title="Treefort Music Hall">
-                  <img src="https://i.ytimg.com/vi/CrTCr2QE2u4/hqdefault.jpg" alt="Treefort Music Hall thumbnail" loading="lazy">
+                <button class="tvtt-video-thumb" type="button" data-video-id="CrTCr2QE2u4" data-title="Testament - Crowd Energy (Live at Treefort Music Hall) | Boise, ID - 03.15.2026">
+                  <img src="https://i.ytimg.com/vi/CrTCr2QE2u4/hqdefault.jpg" alt="Testament - Crowd Energy (Live at Treefort Music Hall) | Boise, ID - 03.15.2026 thumbnail" loading="lazy">
                   <span class="tvtt-thumb-label">
-                    <span class="tvtt-thumb-title">Treefort Music Hall</span>
+                    <span class="tvtt-thumb-title">Testament - Crowd Energy (Live at Treefort Music Hall) | Boise, ID - 03.15.2026</span>
                     <span class="tvtt-thumb-channel">Treasure Valley Tech Tavern</span>
                   </span>
                   <span class="tvtt-play-icon" aria-hidden="true"></span>
@@ -684,10 +701,10 @@
           <article class="tvtt-place-card">
             <div class="tvtt-place-media">
               <div class="tvtt-video-frame">
-                <button class="tvtt-video-thumb" type="button" data-video-id="IXVWdNtWghs" data-title="ExtraMile Arena">
-                  <img src="https://i.ytimg.com/vi/IXVWdNtWghs/hqdefault.jpg" alt="ExtraMile Arena thumbnail" loading="lazy">
+                <button class="tvtt-video-thumb" type="button" data-video-id="IXVWdNtWghs" data-title="Tim McGraw - I Like It, I Love It (Live at ExtraMile Arena) | Boise, ID - 04.06.2024">
+                  <img src="https://i.ytimg.com/vi/IXVWdNtWghs/hqdefault.jpg" alt="Tim McGraw - I Like It, I Love It (Live at ExtraMile Arena) | Boise, ID - 04.06.2024 thumbnail" loading="lazy">
                   <span class="tvtt-thumb-label">
-                    <span class="tvtt-thumb-title">ExtraMile Arena</span>
+                    <span class="tvtt-thumb-title">Tim McGraw - I Like It, I Love It (Live at ExtraMile Arena) | Boise, ID - 04.06.2024</span>
                     <span class="tvtt-thumb-channel">Treasure Valley Tech Tavern</span>
                   </span>
                   <span class="tvtt-play-icon" aria-hidden="true"></span>
@@ -707,10 +724,10 @@
           <article class="tvtt-place-card">
             <div class="tvtt-place-media">
               <div class="tvtt-video-frame">
-                <button class="tvtt-video-thumb" type="button" data-video-id="9bJIL57bduU" data-title="Ford Idaho Center">
-                  <img src="https://i.ytimg.com/vi/9bJIL57bduU/hqdefault.jpg" alt="Ford Idaho Center thumbnail" loading="lazy">
+                <button class="tvtt-video-thumb" type="button" data-video-id="9bJIL57bduU" data-title="Dave Matthews Band - #41 (Live at Ford Idaho Center) | Nampa, ID - 11.08.2022">
+                  <img src="https://i.ytimg.com/vi/9bJIL57bduU/hqdefault.jpg" alt="Dave Matthews Band - #41 (Live at Ford Idaho Center) | Nampa, ID - 11.08.2022 thumbnail" loading="lazy">
                   <span class="tvtt-thumb-label">
-                    <span class="tvtt-thumb-title">Ford Idaho Center</span>
+                    <span class="tvtt-thumb-title">Dave Matthews Band - #41 (Live at Ford Idaho Center) | Nampa, ID - 11.08.2022</span>
                     <span class="tvtt-thumb-channel">Treasure Valley Tech Tavern</span>
                   </span>
                   <span class="tvtt-play-icon" aria-hidden="true"></span>
